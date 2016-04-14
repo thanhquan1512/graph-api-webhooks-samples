@@ -15,7 +15,7 @@ app.listen(app.get('port'));
 
 app.use(bodyParser.json());
 
-app.get('/webhook', function (req, res) {
+app.get('/', function (req, res) {
   if (req.query['hub.verify_token'] === 'thay_phay_buc_token') {
     res.send(req.query['hub.challenge']);
   } else {
