@@ -31,10 +31,11 @@ app.post('/', function (req, res) {
     sender = event.sender.id;
     if (event.message && event.message.text) {
       text = event.message.text;
-      if (text === 'Generic') {
-      	sendTextMessage(sender, "Gotcha!! ");
+      if(text.indexOf("Hello") > -1) {
+      	sendTextMessage(sender, "Xin chào !");
+      } else {
+       sendTextMessage(sender, "Thầy chưa hiểu ý, con nói lại cho thầy nghe nào.");
       }
-      sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
     }
   }
   res.sendStatus(200);
@@ -58,9 +59,9 @@ function sendTextMessage(sender, text) {
     if (error) {
       console.log('Error sending message: ', error);
     } else if (response.body.error) {
-      console.log('Error: ', response.body.error);
-    }
-  });
+						console.log('Error: ', response.body.error);
+   }
+ });
 }
 
 app.listen();
