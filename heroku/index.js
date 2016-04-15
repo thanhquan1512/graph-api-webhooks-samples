@@ -36,7 +36,7 @@ app.post('/', function (req, res) {
       	sendTextMessage(sender, "Chào con");
       	phase = 1;
       }
-      else if (phase >= 1){
+      else if (phase === 1){
       	sendTextMessage(sender, "Muốn thầy xem bói không nào?");
       	phase = 2;
       }
