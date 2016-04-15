@@ -31,6 +31,9 @@ app.post('/', function (req, res) {
     sender = event.sender.id;
     if (event.message && event.message.text) {
       text = event.message.text;
+      if (text === 'Generic') {
+      	sendTextMessage(sender, "Gotcha!! ");
+      }
       sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
     }
   }
