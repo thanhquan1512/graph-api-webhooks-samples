@@ -10,6 +10,7 @@ var request = require('request');
 var bodyParser = require('body-parser');
 var express = require('express');
 var app = express();
+var phase = 0;
 
 app.set('port', (process.env.PORT || 5000));
 app.listen(app.get('port'));
@@ -31,9 +32,18 @@ app.post('/', function (req, res) {
     sender = event.sender.id;
     if (event.message && event.message.text) {
       text = event.message.text;
-      if(text.indexOf("Hello") > -1) {
-      	sendTextMessage(sender, "Xin chào !");
-      } else {
+      if(text.indexOf("Hello") > -1 || text.indexOf("chào") > -1) {
+      	sendTextMessage(sender, "Chào con");
+      	phase = 1;
+      }
+      else if (phase >= 1){
+      	sendTextMessage(sender, "Muốn thầy xem bói không nào?");
+      	phase = 2;
+      }
+      else if((text.indexOf("có") > -1 || text.indexOf("muốn") > -1 || text.indexOf("yes") > -1) && phase === 2) {
+      	sendTextMessage(sender, "Được, con tên gì?");
+      }
+      else {
        sendTextMessage(sender, "Thầy chưa hiểu ý, con nói lại cho thầy nghe nào.");
       }
     }
